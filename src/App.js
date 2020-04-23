@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { data } from './utils';
+const list = data();
+const App = () => (
+  <div className="App">
+    <Header title="DevTools" />
+    <Content title="DevTools" list={list} />
+  </div>
+);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Header = props => (
+  <div className="App-header">
+    {props.title}
+  </div>
+);
+
+const Content = props => (
+  <div>
+    {props.title}
+    <Table list={props.list}/>
+  </div>
+);
+
+const Table = ({ list }) => (
+  <div>
+    {list.map(item => (<Row key={item.id} item={item} />))}
+  </div>
+);
+
+const Row = ({ item }) => (
+  <div>{item.name}</div>
+);
 
 export default App;
